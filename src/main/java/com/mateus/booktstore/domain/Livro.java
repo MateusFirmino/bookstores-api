@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Livro implements Serializable {
+
     private static final long serialVersoinUID = 1L;
 
     @Id
@@ -23,6 +25,7 @@ public class Livro implements Serializable {
     }
 
     public Livro(Integer id, String titulo, String nome_autor, String texto, Categoria categoria) {
+        super();
         this.id = id;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
@@ -78,13 +81,24 @@ public class Livro implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Livro)) return false;
-        Livro livro = (Livro) o;
-        return Objects.equals(getId(), livro.getId());
+        if (o == null)
+            return false;
+        if (getClass() != o.getClass())
+            return false;
+        Livro other = (Livro) o;
+        if (id == null){
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        final int prime = 31;
+        int result = 1;
+        result = prime * result +((id == null) ? 0 : id.hashCode());
+        return result;
     }
 }

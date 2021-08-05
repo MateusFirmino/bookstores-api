@@ -66,13 +66,24 @@ public class Categoria implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Categoria)) return false;
-        Categoria categoria = (Categoria) o;
-        return getId().equals(categoria.getId());
+        if (o == null)
+            return false;
+        if (getClass() != o.getClass())
+            return false;
+        Categoria other = (Categoria) o;
+        if (id == null){
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        final int prime = 31;
+        int result = 1;
+        result = prime * result +((id == null) ? 0 : id.hashCode());
+        return result;
     }
 }
