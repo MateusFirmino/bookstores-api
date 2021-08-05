@@ -18,7 +18,7 @@ public class Livro implements Serializable {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    public Livro(){
+    public Livro() {
         super();
     }
 

@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Categoria implements Serializable{
+public class Categoria implements Serializable {
+
     private static final long serialVersoinUID = 1L;
 
     @Id
@@ -19,7 +20,7 @@ public class Categoria implements Serializable{
     @OneToMany(mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
 
-    public Categoria(){
+    public Categoria() {
         super();
     }
 
