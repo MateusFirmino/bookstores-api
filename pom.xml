@@ -6,20 +6,26 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.11.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <version>2.5.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.valdir</groupId>
-    <artifactId>bookstore</artifactId>
+    <groupId>com.mateus</groupId>
+    <artifactId>booktstore</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>bookstore</name>
-    <description>Bookstore Manager Project</description>
+    <name>booktstore</name>
+    <description>Demo project for Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
