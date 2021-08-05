@@ -1,13 +1,21 @@
 package com.mateus.booktstore.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Livro {
+public class Livro implements Serializable {
+    private static final long serialVersoinUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String nome_autor;
     private String texto;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro(){
