@@ -2,6 +2,7 @@ package com.mateus.booktstore.services;
 
 import com.mateus.booktstore.domain.Categoria;
 import com.mateus.booktstore.repositories.CategoriaRepository;
+import com.mateus.booktstore.services.exceptions.ObejctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,13 @@ public class CategoriaService {
     private CategoriaRepository repository;
 
     @Autowired
-    public CategoriaService(CategoriaRepository repository){
+    public CategoriaService(CategoriaRepository repository) {
         this.repository = repository;
     }
 
-    public Categoria findByid(Integer id){
+    public Categoria findByid(Integer id) {
         Optional<Categoria> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObejctNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
 }
