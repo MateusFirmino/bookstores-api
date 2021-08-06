@@ -28,4 +28,10 @@ public class CategoriaService {
         return repository.findAll();
     }
 
+    public Categoria create(Categoria obj){
+        obj.setId(null); //Se passar id como param. e ele ja existir na base, vai sobrescrever , por isso é nulo.
+        return repository.save(obj);
+
+    }
+
 }
