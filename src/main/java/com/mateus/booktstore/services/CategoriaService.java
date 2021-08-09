@@ -1,6 +1,7 @@
 package com.mateus.booktstore.services;
 
 import com.mateus.booktstore.domain.Categoria;
+import com.mateus.booktstore.dtos.CategoriaDTO;
 import com.mateus.booktstore.repositories.CategoriaRepository;
 import com.mateus.booktstore.services.exceptions.ObejctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,10 @@ public class CategoriaService {
 
     }
 
+    public Categoria update(Integer id, CategoriaDTO objDto) {
+        Categoria obj = findByid(id);
+        obj.setNome(objDto.getNome());
+        obj.setDescricao(objDto.getDescrição());
+        return repository.save(obj);
+    }
 }

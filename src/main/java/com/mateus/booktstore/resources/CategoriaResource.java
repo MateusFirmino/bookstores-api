@@ -43,6 +43,10 @@ public class CategoriaResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
-}
 
-//localhost:8080/categorias/1
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoriaDTO> update(@PathVariable Integer id , @RequestBody CategoriaDTO objDto) {
+        Categoria newObj = service.update(id, objDto);
+        return ResponseEntity.ok().body(new CategoriaDTO(newObj)); // instanciou o categoria Dto e ja retornou na mesma linha
+    }
+}
