@@ -1,5 +1,6 @@
 package com.mateus.booktstore.services;
 
+import com.mateus.booktstore.domain.Categoria;
 import com.mateus.booktstore.domain.Livro;
 import com.mateus.booktstore.repositories.LivroRepository;
 import com.mateus.booktstore.services.exceptions.ObejctNotFoundException;
@@ -18,7 +19,7 @@ public class LivroService {
     @Autowired
     private CategoriaService categoriaService;
 
-    public Livro findById(Integer id){
+    public Livro findById(Integer id) {
         Optional<Livro> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObejctNotFoundException("Objeto não encontrado! Id: " + id + ", " +
                 "Tipo: " + Livro.class.getName()));
@@ -33,7 +34,7 @@ public class LivroService {
 
     public Livro update(Integer id, Livro obj) {
         Livro newObj = findById(id);
-        updateData(newObj,obj);
+        updateData(newObj, obj);
         return repository.save(newObj);
     }
 
@@ -41,5 +42,12 @@ public class LivroService {
         newObj.setTitulo(obj.getTitulo());
         newObj.setNome_autor(obj.getNome_autor());
         newObj.setTexto(obj.getTexto());
+    }
+
+    public Livro create(Integer id_cat, Livro obj) {
+        obj.setId(null);
+        Categoria cat = categoriaService.findByid(id_cat);
+        obj.setCategoria(cat);
+        return repository.save(obj);
     }
 }
