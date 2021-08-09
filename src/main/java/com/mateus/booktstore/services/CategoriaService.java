@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
 
-    private CategoriaRepository repository;
+    private final CategoriaRepository repository;
 
     @Autowired
     public CategoriaService(CategoriaRepository repository) {
@@ -39,7 +39,7 @@ public class CategoriaService {
     public Categoria update(Integer id, CategoriaDTO objDto) {
         Categoria obj = findByid(id);
         obj.setNome(objDto.getNome());
-        obj.setDescricao(objDto.getDescrição());
+        obj.setDescricao(objDto.getDescricao());
         return repository.save(obj);
     }
 
