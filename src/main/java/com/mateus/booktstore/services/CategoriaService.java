@@ -5,7 +5,7 @@ import com.mateus.booktstore.dtos.CategoriaDTO;
 import com.mateus.booktstore.repositories.CategoriaRepository;
 import com.mateus.booktstore.services.exceptions.ObejctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,11 +26,11 @@ public class CategoriaService {
         return obj.orElseThrow(() -> new ObejctNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
-    public List<Categoria> findAll(){
+    public List<Categoria> findAll() {
         return repository.findAll();
     }
 
-    public Categoria create(Categoria obj){
+    public Categoria create(Categoria obj) {
         obj.setId(null); //Se passar id como param. e ele ja existir na base, vai sobrescrever , por isso é nulo.
         return repository.save(obj);
 
@@ -45,6 +45,11 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findByid(id);
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new com.mateus.booktstore.services.exceptions.DataIntegrityViolationException("Categoria não pode ser deletada!" +
+                    " Possui livros associados");
+        }
     }
 }
