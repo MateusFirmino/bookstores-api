@@ -5,6 +5,7 @@ import com.mateus.booktstore.dtos.CategoriaDTO;
 import com.mateus.booktstore.repositories.CategoriaRepository;
 import com.mateus.booktstore.services.exceptions.ObejctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class CategoriaService {
         obj.setNome(objDto.getNome());
         obj.setDescricao(objDto.getDescrição());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findByid(id);
+        repository.deleteById(id);
     }
 }
